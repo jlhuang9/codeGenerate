@@ -6,10 +6,12 @@ import java.util.Map;
 public class TypeUtils {
     private static final String[][] x =
             {
-                    {"bigint", "long", "BIGINT"},
+                    {"bigint", "Long", "BIGINT"},
                     {"varchar", "String", "VARCHAR"},
-                    {"tinyint", "int", "TINYINT"},
-                    {"datetime", "Date", "TIMESTAMP"}
+                    {"tinyint", "Integer", "TINYINT"},
+                    {"datetime", "Date", "TIMESTAMP"},
+                    {"decimal", "BigDecimal", "DECIMAL"},
+                    {"text", "String", "VARCHAR"}
             };
 
     private static final Map<String, String> typeMap;

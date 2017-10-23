@@ -3,6 +3,7 @@ package ${dao_impl_package};
 import ${entry_package}.${model}Pojo;
 import ${mapper_package}.${model}Mapper;
 import ${dao_package}.${model}Dao;
+import ${base_entry_package}.BaseAccessDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import java.util.List;
@@ -19,12 +20,12 @@ public class ${model}DaoImpl implements ${model}Dao{
     /**
      * 获取数据条数
      *
-     * @param ${model_low_first}Pojo
+     * baseAccessDto
      * @return
      */
     @Override
-    public long count(${model}Pojo ${model_low_first}Pojo){
-        return ${model_low_first}Mapper.count(${model_low_first}Pojo);
+    public long count(BaseAccessDto baseAccessDto){
+        return ${model_low_first}Mapper.count(baseAccessDto);
     }
 
     /**
@@ -44,37 +45,29 @@ public class ${model}DaoImpl implements ${model}Dao{
      * @return
      */
     @Override
-    public ${model}Pojo get(${model}Pojo ${model_low_first}Pojo) {
-        return ${model_low_first}Mapper.get(${model_low_first}Pojo);
+    public ${model}Pojo getEntry(${model}Pojo ${model_low_first}Pojo) {
+        return ${model_low_first}Mapper.getEntry(${model_low_first}Pojo);
     }
 
     /**
-     * @param ${model_low_first}Pojo
+     * @param baseAccessDto
      * @return
      */
     @Override
-    public List<${model}Pojo> findList(${model}Pojo ${model_low_first}Pojo) {
-        return ${model_low_first}Mapper.findList(${model_low_first}Pojo);
+    public List<${model}Pojo> findList(BaseAccessDto baseAccessDto) {
+        return ${model_low_first}Mapper.findList(baseAccessDto);
     }
     /**
      * 查询所有数据列表
      *
-     * @param ${model_low_first}Pojo
+     * @param baseAccessDto
      * @return
      */
     @Override
-    public List<${model}Pojo> findAllList(${model}Pojo ${model_low_first}Pojo) {
-        return ${model_low_first}Mapper.findAllList(${model_low_first}Pojo);
+    public List<${model}Pojo> findAllList(BaseAccessDto baseAccessDto) {
+        return ${model_low_first}Mapper.findAllList(baseAccessDto);
     }
-    /**
-     * 查询所有数据列表
-     *
-     * @return
-     */
-    @Override
-    public List<${model}Pojo> findAllList() {
-        return ${model_low_first}Mapper.findAllList();
-    }
+
     /**
      * 插入数据
      *
@@ -116,7 +109,7 @@ public class ${model}DaoImpl implements ${model}Dao{
      * @return
      */
     @Override
-    public int delete(${model}Pojo ${model_low_first}Pojo) {
-        return ${model_low_first}Mapper.delete(${model_low_first}Pojo);
+    public int deleteEntry(${model}Pojo ${model_low_first}Pojo) {
+        return ${model_low_first}Mapper.deleteEntry(${model_low_first}Pojo);
     }
 }

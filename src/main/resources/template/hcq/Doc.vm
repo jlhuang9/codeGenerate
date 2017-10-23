@@ -1,0 +1,5 @@
+|参数名|类型|说明|
+|:-----  |:-----|-----  |
+#foreach($column in $columns)
+| $column.name | $column.type | $column.comment |
+#end

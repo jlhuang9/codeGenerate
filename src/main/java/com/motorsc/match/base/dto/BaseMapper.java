@@ -1,4 +1,4 @@
-package com.qfy.base.dto;
+package com.motorsc.match.base.dto;
 
 import java.util.List;
 
@@ -27,21 +27,21 @@ public interface BaseMapper<T> {
      * @param entity
      * @return
      */
-    T get(T entity);
+    T getEntry(T entity);
 
     /**
-     * @param entity
+     * @param baseAccessDto
      * @return
      */
-    List<T> findList(T entity);
+    List<T> findList(BaseAccessDto baseAccessDto);
 
     /**
      * 查询所有数据列表
      *
-     * @param entity
+     * @param baseAccessDto
      * @return
      */
-    List<T> findAllList(T entity);
+    List<T> findAllList(BaseAccessDto baseAccessDto);
 
     /**
      * 查询所有数据列表
@@ -82,5 +82,5 @@ public interface BaseMapper<T> {
      * @param entity
      * @return
      */
-    int delete(T entity);
+    int deleteEntry(T entity);
 }

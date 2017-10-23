@@ -1,6 +1,7 @@
 package ${dao_package};
 
 import ${entry_package}.${model}Pojo;
+import ${base_entry_package}.BaseAccessDto;
 
 import java.util.List;
 
@@ -16,7 +17,7 @@ public interface ${model}Dao {
      * @param ${model_low_first}Pojo
      * @return
      */
-    long count(${model}Pojo ${model_low_first}Pojo);
+    long count(BaseAccessDto baseAccessDto);
 
     /**
      * 获取单条数据
@@ -32,28 +33,21 @@ public interface ${model}Dao {
      * @param ${model_low_first}Pojo
      * @return
      */
-    ${model}Pojo get(${model}Pojo ${model_low_first}Pojo);
+    ${model}Pojo getEntry(${model}Pojo ${model_low_first}Pojo);
 
     /**
-     * @param ${model_low_first}Pojo
+     * @param baseAccessDto
      * @return
      */
-    List<${model}Pojo> findList(${model}Pojo ${model_low_first}Pojo);
-
-    /**
-     * 查询所有数据列表
-     *
-     * @param ${model_low_first}Pojo
-     * @return
-     */
-    List<${model}Pojo> findAllList(${model}Pojo ${model_low_first}Pojo);
+    List<${model}Pojo> findList(BaseAccessDto baseAccessDto);
 
     /**
      * 查询所有数据列表
      *
+     * @param baseAccessDto
      * @return
      */
-    List<${model}Pojo> findAllList();
+    List<${model}Pojo> findAllList(BaseAccessDto baseAccessDto);
 
     /**
      * 插入数据
@@ -86,5 +80,5 @@ public interface ${model}Dao {
      * @param ${model_low_first}Pojo
      * @return
      */
-    int delete(${model}Pojo ${model_low_first}Pojo);
+    int deleteEntry(${model}Pojo ${model_low_first}Pojo);
 }

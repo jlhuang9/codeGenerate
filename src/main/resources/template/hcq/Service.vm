@@ -1,6 +1,6 @@
 package ${service_package};
 
-import com.qfy.common.tool.order.ResultDTO;
+import com.motorsc.match.common.tool.PageResult;
 import ${entry_package}.${model}Pojo;
 
 /**
@@ -13,6 +13,17 @@ public interface ${model}Service {
     /**
      * 分页
      */
-    ResultDTO<${model}Pojo> get${model}List(${model}Pojo ${model_low_first}Pojo);
+    PageResult<${model}Pojo> get${model}List(${model}Pojo ${model_low_first}Pojo);
+    
+    ${model}Pojo get(long id);
 
+    ${model}Pojo getEntry(${model}Pojo ${model_low_first}Pojo);
+
+    int delete(long id);
+
+    int deleteEntry(${model}Pojo ${model_low_first}Pojo);
+
+    int insert(${model}Pojo ${model_low_first}Pojo);
+
+    int update(${model}Pojo ${model_low_first}Pojo);
 }

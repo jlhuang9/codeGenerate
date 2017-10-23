@@ -1,5 +1,6 @@
 package com.jlhuang.gen;
 
+import com.jlhuang.gen.filer.ContextFiler;
 import com.jlhuang.gen.util.CodeUtil;
 import com.jlhuang.gen.filer.Filer;
 import com.jlhuang.gen.genHandle.Generate;
@@ -31,6 +32,7 @@ public class ClientHandle {
             context.put("model_low_first", CodeUtil.toLowerCaseFirstOne(camelTableName));
             context.put("table", tableName);
             context.put("table_coment", comment);
+            ContextFiler.proess(context, tableName);
             for (int i = 0; i < generates.size(); i++) {
                 generates.get(i).proess(null, filer, context, value);
             }

@@ -26,14 +26,13 @@
     </resultMap>
 
     <sql id="genTableColumnColumns">
-    #foreach($column in $columns)
-        a.$column.columnName,
-    #end
+        #foreach($column in $columns)a.$column.columnName,
+        #end
         a.create_user,
-            a.create_time,
-            a.update_user,
-            a.update_time,
-            a.yn
+        a.create_time,
+        a.update_user,
+        a.update_time,
+        a.yn
     </sql>
 
     <sql id="genTableColumnJoins">
@@ -41,14 +40,33 @@
 
 
     <sql id="Example_Where_Clause">
+        <trim prefix="WHERE" prefixOverrides="AND|OR">
+            yn = 0
+            #foreach($column in $columns)
+
+            <if test="$column.name!=null and $column.name!=''">
+                and $column.columnName = #{$column.name}
+            </if>
+            #end</trim>
+
     </sql>
 
-    <select id="count" resultType="long" parameterType="${entry_package}.${model}Pojo">
+    <sql id="Access_Where_Clause">
+
+    </sql>
+
+    <sql id="Example_Update_Clause">
+        <trim prefix="WHERE" prefixOverrides="AND|OR">
+            yn = 0
+            and id = #{id}
+        </trim>
+    </sql>
+
+    <select id="count" resultType="long" parameterType="com.motorsc.match.base.dto.BaseAccessDto">
         select count(1)
         from ${table}
-        WHERE yn = #{YN}
         <if test="_parameter != null">
-            <include refid="Example_Where_Clause" />
+            <include refid="Access_Where_Clause"/>
         </if>
     </select>
     <select id="get" resultMap="BaseResultMap" parameterType="long">
@@ -59,40 +77,48 @@
         WHERE a.id = #{id}
     </select>
 
-    <select id="findList" resultMap="BaseResultMap" parameterType="${entry_package}.${model}Pojo">
+    <select id="getEntry" resultMap="BaseResultMap" parameterType="${entry_package}.${model}Pojo">
         SELECT
         <include refid="genTableColumnColumns"/>
         FROM ${table} a
         <include refid="genTableColumnJoins"/>
-        WHERE yn = #{YN}
         <if test="_parameter != null">
-            <include refid="Example_Where_Clause" />
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+
+    <select id="findList" resultMap="BaseResultMap" parameterType="com.motorsc.match.base.dto.BaseAccessDto">
+        SELECT
+        <include refid="genTableColumnColumns"/>
+        FROM ${table} a
+        <include refid="genTableColumnJoins"/>
+        <if test="_parameter != null">
+            <include refid="Access_Where_Clause"/>
         </if>
         limit #{start},#{pageSize}
     </select>
 
-    <select id="findAllList" resultMap="BaseResultMap" parameterType="${entry_package}.${model}Pojo">
+    <select id="findAllList" resultMap="BaseResultMap" parameterType="com.motorsc.match.base.dto.BaseAccessDto">
         SELECT
         <include refid="genTableColumnColumns"/>
         FROM ${table} a
         <include refid="genTableColumnJoins"/>
         <if test="_parameter != null">
-            <include refid="Example_Where_Clause" />
+            <include refid="Access_Where_Clause"/>
         </if>
-        WHERE a.yn = #{YN}
     </select>
 
     <insert id="insert" parameterType="${entry_package}.${model}Pojo">
         INSERT INTO ${table}(
-        #foreach($column in $columns)$column.columnName,
-        #end
+        #foreach($column in $columns)#if($column.extra!="auto_increment")$column.columnName,
+        #end#end
 
         create_user,
         create_time,
         yn
         ) VALUES (
-        #foreach($column in $columns)#{$column.name},
-        #end#{createUser},
+        #foreach($column in $columns)#if($column.extra!="auto_increment")#{$column.name},
+        #end#end#{createUser},
         now(),
         #{YN}
         )
@@ -102,17 +128,24 @@
         UPDATE ${table} SET
         #foreach($column in $columns)#if($column.columnName!="id")
 
-        $column.columnName = #{$column.name},
+        <if test="$column.name!=null and $column.name!=''">
+            $column.columnName = #{$column.name},
+        </if>
         #end#end update_user = #{updateUser},
         update_time = now()
-        WHERE a.id = #{id}
+        <include refid="Example_Update_Clause"/>
     </update>
 
     <update id="delete" parameterType="long">
         UPDATE ${table} SET
-        yn = {NOT_YN}
+        yn = #{NOT_YN}
         WHERE id = #{id}
     </update>
 
+    <update id="deleteEntry" parameterType="${entry_package}.${model}Pojo">
+        UPDATE ${table} SET
+        yn = #{NOT_YN}
+        <include refid="Example_Where_Clause"/>
+    </update>
 
 </mapper>

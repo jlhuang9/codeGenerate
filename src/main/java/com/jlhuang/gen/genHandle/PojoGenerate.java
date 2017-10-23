@@ -7,6 +7,7 @@ import com.jlhuang.gen.moudel.Column;
 import com.jlhuang.gen.moudel.Table;
 import org.apache.velocity.VelocityContext;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class PojoGenerate implements Generate {
@@ -24,13 +25,42 @@ public class PojoGenerate implements Generate {
         //过滤
         List<Column> columns1 = filer.columnFiler(columns);
         context.put("columns",columns1);
-
+        proess(context, columns);
         try {
             VelocityUtil.generate(modelPath,outPath,context);
         } catch (Exception e) {
              e.printStackTrace();
         }
         System.out.println("end");
+    }
+
+    private void proess(VelocityContext context, List<Column> columns) {
+        boolean useBigDecimal = false;
+        boolean useDate = false;
+        for (Column column : columns) {
+            if (column.getDataType().equals("decimal")) {
+                useBigDecimal = true;
+                break;
+            }
+        }
+        for (Column column : columns) {
+            if (!column.getColumnName().equals("create_time")&&!column.getColumnName().equals("update_time")&&column.getDataType().equals("datetime")) {
+                useDate = true;
+                break;
+            }
+        }
+
+        if (useDate) {
+            context.put("useDate", true);
+        }else {
+            context.put("useDate", false);
+        }
+
+        if (useBigDecimal) {
+            context.put("userDecimal", true);
+        }else {
+            context.put("userDecimal", false);
+        }
     }
 
 

@@ -1,6 +1,6 @@
-package com.qfy.common.tool;
+package com.motorsc.match.common.tool;
 
-import com.qfy.base.dto.BaseDto;
+import com.motorsc.match.base.dto.BaseDto;
 
 /**
  * 

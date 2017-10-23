@@ -1,7 +1,12 @@
 package ${entry_package};
 
 import ${base_entry_package}.BaseEntry;
-
+#if(${userDecimal})
+import java.math.BigDecimal;
+#end
+#if(${useDate})
+import java.util.Date;
+#end
 /**
  * ${model}Pojo实体
  * table ${table}

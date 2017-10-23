@@ -1,4 +1,4 @@
-package com.qfy.common.tool;
+package com.motorsc.match.common.tool;
 
 /**
  * 错误代码

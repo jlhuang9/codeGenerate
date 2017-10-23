@@ -1,6 +1,6 @@
-package com.qfy.base.dto;
+package com.motorsc.match.base.dto;
 
-import com.qfy.common.tool.Base;
+import com.motorsc.match.common.tool.Base;
 
 public class BaseEntry extends Base {
 

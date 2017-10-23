@@ -69,15 +69,15 @@
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="configLocation" value="classpath:mybatis-config.xml"></property>
 		<property name="dataSource" ref="dataSource" />
-		<property name="mapperLocations" value="classpath*:com/qfy/mapper/*.xml" />
-		<property name="typeAliasesPackage" value="com.qfy.mapper" />
+		<property name="mapperLocations" value="classpath*:com/motorsc/match/services/*/mapper/*.xml" />
+		<property name="typeAliasesPackage" value="com.motorsc.match.services.*.mapper" />
 
 	</bean>
 
 	<!-- 通过扫描的模式,自动注入bean -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
-		<property name="basePackage" value="com.qfy.mapper" />
+		<property name="basePackage" value="com.motorsc.match.services.*.mapper" />
 	</bean>
 
 	<!-- 当在程序中使用注解的事务时用 -->

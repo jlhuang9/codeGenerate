@@ -12,7 +12,15 @@ public class Column {
     private String type;//javatype
     private String mybatisType;//mybatis type
     private String upName;
+    private String extra;
 
+    public String getExtra() {
+        return extra;
+    }
+
+    public void setExtra(String extra) {
+        this.extra = extra;
+    }
 
     public String getMybatisType() {
         if (StringUtils.isBlank(mybatisType)) {

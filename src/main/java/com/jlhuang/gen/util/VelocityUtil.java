@@ -30,9 +30,9 @@ public class VelocityUtil {
             Template template = Velocity.getTemplate(getFile(inputVmFilePath), "utf-8");
             File outputFile = new File(outputFilePath);
             if (!outputFile.getParentFile().exists()) {
-                if(outputFile.getParentFile().mkdirs()){
-
-                };
+                if(!outputFile.getParentFile().mkdirs()){
+                    throw new RuntimeException("创建文件目录失败");
+                }
             }
             FileWriterWithEncoding writer = new FileWriterWithEncoding(outputFile, "utf-8");
             template.merge(context, writer);

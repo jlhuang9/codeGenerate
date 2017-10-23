@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Message {
+    public static final String DOC_VM_PATH;
     public static final String MAPPER_VM_PATH;
     public static final String MAPPER_XML_VM_PATH;
     public static final String POJO_VM_PATH;
@@ -15,6 +16,7 @@ public class Message {
     public static final String SERVICE_IMPL_VM_PATH;
     static {
         Class<? extends Thread> aClass = Thread.currentThread().getClass();
+        DOC_VM_PATH = aClass.getResource("/template/hcq/Doc.vm").getPath();
         MAPPER_VM_PATH = aClass.getResource("/template/hcq/Mapper.vm").getPath();
         MAPPER_XML_VM_PATH = aClass.getResource("/template/hcq/MapperXML.vm").getPath();
         POJO_VM_PATH = aClass.getResource("/template/hcq/Pojo.vm").getPath();

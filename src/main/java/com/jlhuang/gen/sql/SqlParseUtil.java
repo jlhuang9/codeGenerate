@@ -36,7 +36,7 @@ public class SqlParseUtil {
         }
         for (Table table1 : tables) {
             String tableName = table1.getTableName();
-            sql = "SELECT column_name,data_type,column_comment,is_nullable,COLUMN_KEY FROM information_schema.`COLUMNS`\n" +
+            sql = "SELECT column_name,data_type,column_comment,is_nullable,COLUMN_KEY,extra FROM information_schema.`COLUMNS`\n" +
                     "WHERE table_schema = ? AND table_name = ?";
             list.clear();
             list.add(datebaseName);
@@ -74,14 +74,15 @@ public class SqlParseUtil {
         Column column = new Column();
 //        String is_nullable = (String) map.get("IS_NULLABLE");
         String column_name = (String) map.get("COLUMN_NAME");
-//        String column_key = (String) map.get("COLUMN_KEY");
         String data_type = (String) map.get("DATA_TYPE");
         String column_comment = (String)map.get("COLUMN_COMMENT");
+        String extra = (String) map.get("EXTRA");
         column.setColumnName(column_name);
         column_name = CodeUtil.underlineToCamel(column_name);
         column.setComment(column_comment);
         column.setDataType(data_type);
         column.setName(column_name);
+        column.setExtra(extra);
         return column;
     }
 

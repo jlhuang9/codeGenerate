@@ -4,7 +4,7 @@
  * Purpose: Defines the Class TempData
  ***********************************************************************/
 
-package com.qfy.base.dto;
+package com.motorsc.match.base.dto;
 
 import java.io.Serializable;
 
